@@ -7,11 +7,21 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional
 from agents import UserSimulatorAgent, RecommendationAgent
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="NaijaAgentX - DSN x BCT LLM Agent Platform",
     description="Culturally Nuanced User Modeling & Intelligent Recommendation",
     version="1.0.0"
+)
+
+# Enable CORS for frontend deployment (Vercel)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (can be restricted to Vercel URL later)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
 )
 
 # Load data helper
@@ -296,4 +306,5 @@ def get_index():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
