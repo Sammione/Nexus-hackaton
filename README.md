@@ -1,12 +1,12 @@
 # NaijaAgentX: Culturally-Nuanced LLM Agent Framework for User Modeling & Intelligent Recommendation
 
-🚀 **Winner-Ready Submission for the DSN x BCT LLM Agent Challenge (Hackathon 3.0)**
+
 
 **NaijaAgentX** is a state-of-the-art hybrid LLM Agent Framework that implements culturally-nuanced User Modeling (Task A) and Reasoning-Before-Recommending Conversational Retrieval (Task B). The platform combines detailed few-shot grounding, stylistic alignment, a high-fidelity **Nigerian Cultural Adaptation Layer**, and an interactive premium Web Dashboard.
 
----
 
-## 📖 Table of Contents
+
+##  Table of Contents
 1. [Core Features](#-core-features)
 2. [System Architecture](#%EF%B8%8F-system-architecture)
 3. [Empirical Ablation Study Results](#-empirical-ablation-study-results)
@@ -15,27 +15,27 @@
 6. [API Specifications](#-api-specifications)
 7. [Repository Structure](#-repository-structure)
 
----
 
-## 🌟 Core Features
 
-### 👤 Task A: Culturally-Nuanced User Simulator Agent
+##  Core Features
+
+###  Task A: Culturally-Nuanced User Simulator Agent
 *   **Behavioral Few-Shot Grounding:** Reads historical reviews of targeted users, locking down their specific rating habits (generous, balanced, critical) and review length preferences (concise, moderate, detailed).
 *   **Linguistic Alignment Layer:** Conditions the agent to capture distinct user styles, vocabulary, and sentiment structures.
 *   **Nigerian Flavor Toggle:** Infuses authentic modern Nigerian English and Pidgin slang naturally, contextualizing issues around local problems (e.g. logistics bike delivery delays, power grid NEPA failure references, financial inflation *"sapa"* expressions).
 
-### 🤖 Task B: Reasoning Conversational Recommendation Agent
+### Task B: Reasoning Conversational Recommendation Agent
 *   **Chain-of-Thought (CoT) Reasoning:** Employs a rigorous reasoning loop (*Thought → Retrieval → Decision*) before returning a ranked list of items, exposing internal agent logs to the user in a monospace shell.
 *   **Cold-Start Mitigation:** Utilizes multi-turn conversational cues to discover user preferences when past data is absent.
 *   **Cross-Domain Mapping:** Recommends Nollywood comedies, street-food (Glover Court Suya), or chilled Palm Wine based on historical tech purchase profiles.
 
-### 📊 Premium Web Dashboard & Data Science Ablation Hub
+### Premium Web Dashboard & Data Science Ablation Hub
 *   **Futuristic Glassmorphic Theme:** Curated deep indigo, neon violet, and electric green visual system built with fluid animations.
 *   **Data Science Ablation panel:** Interactive `Chart.js` displays demonstrating empirical metric changes (RMSE, Hit Rate@10) across baseline vs. agentic models.
 
----
 
-## 🛠️ System Architecture
+
+##  System Architecture
 
 The workflow below illustrates the integration of data processing, simulation parameters, and reasoning workflows:
 
@@ -64,7 +64,7 @@ graph TD
 
 ---
 
-## 📊 Empirical Ablation Study Results
+##  Empirical Ablation Study Results
 
 Evaluated across a held-out test split of the Amazon Reviews dataset using pure-Python ROUGE metric generators, our agentic framework demonstrates excellent improvements:
 
@@ -87,9 +87,9 @@ Our **Nigerian Cultural Adaptation Layer** aligns the agent's behavior to sound 
     *   **Product Failure/Quality Issues:** Reference to *"NEPA took light"*, *"generator fuel cost"*, or *"generator noise"*.
     *   **Financial constraints:** Expressed as *"Sapa is biting"*.
 
----
 
-## 🚀 Getting Started (Quick Launch)
+
+##  Getting Started (Quick Launch)
 
 ### Prerequisites
 Make sure you have **Python 3.9+** or **Docker** installed.
@@ -136,7 +136,7 @@ The application will compile data, run the server, and serve the dashboard at `h
 
 ---
 
-## 🔌 API Specifications
+##  API Specifications
 
 ### 1. Retrieve User roster
 *   **Endpoint:** `GET /api/users`
@@ -185,9 +185,9 @@ The application will compile data, run the server, and serve the dashboard at `h
     }
     ```
 
----
 
-## 📁 Repository Structure
+
+##  Repository Structure
 ```
 c:/Users/somol/OneDrive/Documents/hack/
 ├── data/                      # Compiled profiles & ablation logs
@@ -205,5 +205,5 @@ c:/Users/somol/OneDrive/Documents/hack/
 ├── .env.example               # Credentials template
 └── README.md                  # Comprehensive documentation
 ```
----
-🍀 *All systems operational. Good luck winning the DSN x BCT Hackathon!*
+
+ *All systems operational. Good luck winning the DSN x BCT Hackathon!*
