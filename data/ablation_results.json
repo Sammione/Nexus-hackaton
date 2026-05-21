@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "RMSE": 2.3238,
+    "ROUGE_1": 0.0966,
+    "ROUGE_2": 0.0051,
+    "ROUGE_L": 0.0678,
+    "HR_10": 1.0,
+    "NDCG_10": 0.5307
+  },
+  "persona_conditioned": {
+    "RMSE": 0.4472,
+    "ROUGE_1": 0.1505,
+    "ROUGE_2": 0.0138,
+    "ROUGE_L": 0.0916,
+    "HR_10": 1.0,
+    "NDCG_10": 1.0
+  },
+  "naija_agent": {
+    "RMSE": 0.8485,
+    "ROUGE_1": 0.1325,
+    "ROUGE_2": 0.0083,
+    "ROUGE_L": 0.0756,
+    "HR_10": 1.0,
+    "NDCG_10": 0.6621
+  }
+}

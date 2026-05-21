@@ -1,0 +1,241 @@
+[
+  {
+    "id": "amzn_1",
+    "title": "Electronics & Household Goods",
+    "domain": "electronics",
+    "desc": "General consumer products fulfilled by third-party sellers.",
+    "reviews_count": 8752,
+    "avg_rating": 2.74,
+    "total_stars": 24007,
+    "tags": [
+      "Amazon",
+      "Service",
+      "Retail"
+    ]
+  },
+  {
+    "id": "amzn_2",
+    "title": "Logistics Service",
+    "domain": "electronics",
+    "desc": "Standard Amazon shipping and home package delivery service.",
+    "reviews_count": 6672,
+    "avg_rating": 2.01,
+    "total_stars": 13413,
+    "tags": [
+      "Amazon",
+      "Service",
+      "Retail"
+    ]
+  },
+  {
+    "id": "amzn_3",
+    "title": "Amazon Prime Subscription",
+    "domain": "electronics",
+    "desc": "Premium membership service offering free fast shipping, Prime Video, and exclusive deals.",
+    "reviews_count": 2029,
+    "avg_rating": 1.86,
+    "total_stars": 3778,
+    "tags": [
+      "Amazon",
+      "Service",
+      "Retail"
+    ]
+  },
+  {
+    "id": "amzn_4",
+    "title": "Payment & Billing Portal",
+    "domain": "electronics",
+    "desc": "Amazon digital payment transactions, refund operations, and credit balance management.",
+    "reviews_count": 3616,
+    "avg_rating": 1.41,
+    "total_stars": 5087,
+    "tags": [
+      "Amazon",
+      "Service",
+      "Retail"
+    ]
+  },
+  {
+    "id": "amzn_5",
+    "title": "Echo Smart Speaker",
+    "domain": "electronics",
+    "desc": "Voice-activated smart home assistant powered by Alexa.",
+    "reviews_count": 141,
+    "avg_rating": 1.56,
+    "total_stars": 220,
+    "tags": [
+      "Amazon",
+      "Service",
+      "Retail"
+    ]
+  },
+  {
+    "id": "mov_1",
+    "title": "A Tribe Called Judah",
+    "domain": "movies",
+    "desc": "A hilarious Nollywood heist comedy drama about family, brotherhood, and extreme Nigerian resilience.",
+    "avg_rating": 4.8,
+    "tags": [
+      "Nollywood",
+      "Comedy",
+      "Family",
+      "Blockbuster"
+    ]
+  },
+  {
+    "id": "mov_2",
+    "title": "The Black Book",
+    "domain": "movies",
+    "desc": "A gritty Nollywood action thriller focusing on corruption, justice, and a father seeking vengeance for his son's murder.",
+    "avg_rating": 4.6,
+    "tags": [
+      "Action",
+      "Thriller",
+      "Crime",
+      "Nollywood"
+    ]
+  },
+  {
+    "id": "mov_3",
+    "title": "Dune: Part Two",
+    "domain": "movies",
+    "desc": "Epic science fiction masterpiece following Paul Atreides as he unites with the Fremen to seek revenge on the conspirators.",
+    "avg_rating": 4.9,
+    "tags": [
+      "Sci-Fi",
+      "Epic",
+      "Adventure",
+      "Hollywood"
+    ]
+  },
+  {
+    "id": "mov_4",
+    "title": "Anikulapo",
+    "domain": "movies",
+    "desc": "A mystical Nollywood fantasy film detailing ancient Yoruba traditions, greed, resurrection, and tragic romance.",
+    "avg_rating": 4.5,
+    "tags": [
+      "Nollywood",
+      "Drama",
+      "Fantasy",
+      "YorubaCulture"
+    ]
+  },
+  {
+    "id": "food_1",
+    "title": "Mega Chicken Lagos",
+    "domain": "food",
+    "desc": "Famous Nigerian restaurant chain serving premium Jollof Rice, smoky grilled chicken, moin-moin, and traditional soups.",
+    "avg_rating": 4.4,
+    "tags": [
+      "Local",
+      "JollofRice",
+      "FastFood",
+      "Lagos"
+    ]
+  },
+  {
+    "id": "food_2",
+    "title": "Yellow Chilli Restaurant",
+    "domain": "food",
+    "desc": "Sophisticated Nigerian dining experience specializing in gourmet local dishes, particularly Seafood Okra and Jollof.",
+    "avg_rating": 4.7,
+    "tags": [
+      "FineDining",
+      "Local",
+      "SeafoodOkra",
+      "Premium"
+    ]
+  },
+  {
+    "id": "food_3",
+    "title": "Glover Court Suya",
+    "domain": "food",
+    "desc": "The gold standard of Lagos street food. Hot, spicy, smoke-kissed beef and chicken suya seasoned with authentic yaji spice.",
+    "avg_rating": 4.9,
+    "tags": [
+      "StreetFood",
+      "Suya",
+      "Spicy",
+      "Nightlife"
+    ]
+  },
+  {
+    "id": "drink_1",
+    "title": "Zobo Premium Brew",
+    "domain": "drinks",
+    "desc": "Chilled, spicy hibiscus drink brewed with fresh ginger, sweet pineapple skins, cloves, and a touch of organic honey.",
+    "avg_rating": 4.7,
+    "tags": [
+      "Traditional",
+      "Organic",
+      "NonAlcoholic",
+      "Spicy"
+    ]
+  },
+  {
+    "id": "drink_2",
+    "title": "Palm Wine (Freshly Tapped)",
+    "domain": "drinks",
+    "desc": "Sweet, bubbly, naturally fermented Nigerian palm wine sourced directly from rural palm groves. Best served ice cold.",
+    "avg_rating": 4.8,
+    "tags": [
+      "Traditional",
+      "Alcoholic",
+      "Organic",
+      "Cultural"
+    ]
+  },
+  {
+    "id": "drink_3",
+    "title": "Chapman Classic Cocktail",
+    "domain": "drinks",
+    "desc": "The signature Nigerian party mocktail. A blend of Fanta, Sprite, Angostura bitters, blackcurrant cordial, and cucumber slices.",
+    "avg_rating": 4.9,
+    "tags": [
+      "Cocktail",
+      "Sweet",
+      "NonAlcoholic",
+      "Classic"
+    ]
+  },
+  {
+    "id": "book_1",
+    "title": "Things Fall Apart",
+    "domain": "books",
+    "desc": "Chinua Achebe's masterpiece detailing pre-colonial life in Igboland and the clash of cultures with British colonial administration.",
+    "avg_rating": 4.9,
+    "tags": [
+      "Classic",
+      "AfricanLiterature",
+      "IgboCulture",
+      "HistoricalFiction"
+    ]
+  },
+  {
+    "id": "book_2",
+    "title": "Half of a Yellow Sun",
+    "domain": "books",
+    "desc": "Chimamanda Ngozi Adichie's hauntingly beautiful epic novel detailing the Biafran War through the eyes of three characters.",
+    "avg_rating": 4.8,
+    "tags": [
+      "HistoricalFiction",
+      "WarDrama",
+      "NollywoodAdapted",
+      "Classic"
+    ]
+  },
+  {
+    "id": "book_3",
+    "title": "The Famished Road",
+    "domain": "books",
+    "desc": "Ben Okri's Booker Prize-winning magical realist novel following Azaro, an abiku or spirit child, living in Lagos during a time of political turmoil.",
+    "avg_rating": 4.7,
+    "tags": [
+      "MagicalRealism",
+      "Lagos",
+      "YorubaCulture",
+      "BookerPrize"
+    ]
+  }
+]
