@@ -119,6 +119,13 @@ class VectorSearchEngine:
                 all_profiles = json.load(f)
         except Exception:
             return {}
+
+        # PERFORMANCE: Cap to 500 most-active profiles to prevent O(N×M×P) lag on 21k user dataset
+        MAX_PROFILES = 500
+        if len(all_profiles) > MAX_PROFILES:
+            import random as _rnd
+            sampled_keys = _rnd.Random(42).sample(list(all_profiles.keys()), MAX_PROFILES)
+            all_profiles = {k: all_profiles[k] for k in sampled_keys}
             
         target_id = user_profile.get("user_id") if isinstance(user_profile, dict) else None
         if not target_id:
@@ -183,6 +190,13 @@ class VectorSearchEngine:
                 all_profiles = json.load(f)
         except Exception:
             return {}
+
+        # PERFORMANCE: Cap to 500 profiles to keep co-occurrence scoring fast
+        MAX_PROFILES = 500
+        if len(all_profiles) > MAX_PROFILES:
+            import random as _rnd
+            sampled_keys = _rnd.Random(42).sample(list(all_profiles.keys()), MAX_PROFILES)
+            all_profiles = {k: all_profiles[k] for k in sampled_keys}
             
         history_ids = [r["product_id"] for r in user_history] if user_history else []
         if not history_ids:

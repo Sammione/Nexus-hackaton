@@ -103,7 +103,7 @@ class UserSimulatorAgent:
     def _build_simulation_prompt(self, user_profile, product, history, habit, style, country, use_nigerian):
         prompt = f"""
 You are an advanced LLM User Simulation Agent designed to model human rating and writing behavior with high fidelity.
-Your goal is to simulate how a specific user would rating and review a new product based on their user persona and historical review behavior.
+Your goal is to simulate how a specific user would rate and review a new product based on their user persona and historical review behavior.
 
 ### Target User Profile:
 - Name: {user_profile.get('name')}
@@ -291,10 +291,9 @@ class RecommendationAgent:
                 preferred_domains.add("drinks")
                 preferred_domains.add("movies")
 
-        # Merge dynamic session memory domains
+        # Merge dynamic session memory domains directly (already clean strings)
         for cat in memory.get("liked_categories", []):
-            cat_clean = cat.lower().replace("movies", "movies").replace("drinks", "drinks").replace("food", "food").replace("books", "books")
-            preferred_domains.add(cat_clean)
+            preferred_domains.add(cat.lower())
 
         # 4. Execute Dense FAISS Retrieval (or TF-IDF fallback)
         query_text = user_message or "Recommend a product for me"
@@ -479,10 +478,12 @@ You must structure your response into exactly four sections:
     def _recommend_rule_based(self, user, catalog, msg, likes, is_cold_start, memory, recommended_items):
         # 1. Fallback dynamic preference memory extraction heuristics
         msg_lower = (msg or "").lower()
+        # Explicit plural map matching catalog domain names exactly
+        plural_map = {"movie": "movies", "food": "food", "drink": "drinks", "book": "books"}
         if "like" in msg_lower or "love" in msg_lower or "want" in msg_lower or "crave" in msg_lower:
             for cat in ["movie", "food", "drink", "book"]:
                 if cat in msg_lower:
-                    plural = cat + "s" if cat != "drinks" else "drinks"
+                    plural = plural_map[cat]
                     if plural not in memory["liked_categories"]:
                         memory["liked_categories"].append(plural)
         if "not" in msg_lower or "dislike" in msg_lower or "avoid" in msg_lower or "hate" in msg_lower or "no" in msg_lower:

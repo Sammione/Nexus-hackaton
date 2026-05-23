@@ -1,6 +1,7 @@
 import os
 import json
 import random
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -9,19 +10,28 @@ from typing import List, Optional
 from agents import UserSimulatorAgent, RecommendationAgent
 from fastapi.middleware.cors import CORSMiddleware
 
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    """Lifespan event handler: loads data once on startup."""
+    load_data()
+    yield
+
 app = FastAPI(
     title="NaijaAgentX - DSN x BCT LLM Agent Platform",
     description="Culturally Nuanced User Modeling & Intelligent Recommendation",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # Enable CORS for frontend deployment (Vercel)
+# NOTE: allow_credentials=True is incompatible with allow_origins=["*"] per the CORS spec.
+# We use allow_credentials=False with wildcard origin so all clients can access the API.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins (can be restricted to Vercel URL later)
-    allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Load data helper
@@ -70,10 +80,7 @@ def load_data():
     except Exception as e:
         print(f"Error loading data stores: {e}.")
 
-# Run initial load
-load_data()
-
-# Instantiate agents
+# Instantiate agents (load_data is called once via lifespan on startup)
 simulator_agent = UserSimulatorAgent()
 recommendation_agent = RecommendationAgent()
 
@@ -122,9 +129,7 @@ class RecommendationRequest(BaseModel):
     message: Optional[str] = None
     chat_history: List[ChatMessage] = []
 
-@app.on_event("startup")
-def startup_event():
-    load_data()
+# Startup is now handled via the lifespan context manager above (FastAPI 0.93+ best practice).
 
 @app.get("/api/users")
 def get_users(limit: int = 100):
@@ -163,8 +168,8 @@ def post_simulate(req: SimulationRequest):
     """
     # 1. Resolve user persona
     if req.user_persona:
-        user = req.user_persona.dict()
-        user["history"] = [h.dict() for h in req.user_persona.history]
+        # Use model_dump() (Pydantic v2) which recursively converts nested models including history
+        user = req.user_persona.model_dump()
     elif req.user_id:
         user = user_profiles.get(req.user_id)
         if not user:
@@ -196,8 +201,8 @@ def post_recommend(req: RecommendationRequest):
     """
     # 1. Resolve user persona
     if req.user_persona:
-        user = req.user_persona.dict()
-        user["history"] = [h.dict() for h in req.user_persona.history]
+        # Use model_dump() (Pydantic v2) which recursively converts nested models including history
+        user = req.user_persona.model_dump()
     elif req.user_id:
         user = user_profiles.get(req.user_id)
         if not user:
