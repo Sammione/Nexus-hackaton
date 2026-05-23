@@ -311,11 +311,15 @@ class RecommendationAgent:
                 limit=3,
                 user_profile=user_profile
             )
-        except Exception:
-            # Fallback if custom search fails
-            from semantic_search import SemanticSearchEngine
-            se = SemanticSearchEngine(products_catalog)
-            recommended_items = se.search(query_text, list(preferred_domains), limit=3)
+        except Exception as e:
+            print(f"Primary search failed: {e}. Trying TF-IDF fallback.")
+            try:
+                from semantic_search import SemanticSearchEngine
+                se = SemanticSearchEngine(products_catalog)
+                recommended_items = se.search(query_text, list(preferred_domains), limit=3)
+            except Exception as e2:
+                print(f"Fallback search also failed: {e2}. Returning empty candidate list.")
+                recommended_items = []
 
         if openai_active:
             prompt = self._build_recommendation_prompt(
@@ -415,6 +419,13 @@ class RecommendationAgent:
         return self._recommend_rule_based(user_profile, products_catalog, user_message, likes, is_cold_start, memory, recommended_items)
 
     def _build_recommendation_prompt(self, user, catalog, chat_history, msg, likes, dislikes, is_cold_start, memory, retrieved_items):
+        # Cap catalog to 20 items to avoid exceeding GPT-4o-mini token limits.
+        # Prioritize synthetic Nigerian-domain products (movies, food, drinks, books) first.
+        priority_domains = {"movies", "food", "drinks", "books"}
+        priority_items = [p for p in catalog if p.get("domain") in priority_domains]
+        other_items = [p for p in catalog if p.get("domain") not in priority_domains]
+        capped_catalog = (priority_items + other_items)[:20]
+
         catalog_str = json.dumps([{
             "id": p.get("id"),
             "title": p.get("title"),
@@ -422,7 +433,7 @@ class RecommendationAgent:
             "desc": p.get("desc"),
             "avg_rating": p.get("avg_rating"),
             "tags": p.get("tags")
-        } for p in catalog], indent=2)
+        } for p in capped_catalog], indent=2)
 
         retrieved_str = ", ".join([f"{p.get('title')} (ID: {p.get('id')}, Sim Score: {p.get('search_score', 0.85)})" for p in retrieved_items])
 
