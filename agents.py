@@ -512,9 +512,23 @@ You must structure your response into exactly four sections:
         for idx, p in enumerate(recommended_items):
             p["search_score"] = p.get("search_score", round(0.8920 - (idx * 0.04), 4))
             rec_display.append(p)
-            
-        p1 = rec_display[0]
+
+        # Guard: if search returned nothing, return a safe cold-start fallback response
+        if not rec_display:
+            return {
+                "reasoning": "-[INTENT UNDERSTANDING]: Query received but no products matched.\n-[MEMORY RETRIEVAL]: Catalog may still be loading.\n-[FINAL SELECTION]: No candidates available.",
+                "response": (
+                    f"Hello {user.get('name', 'there')}! Abeg, our product catalog is still warming up o. "
+                    f"Try again in a moment or select a different user profile, sharp sharp!"
+                ),
+                "recommended_items": [],
+                "is_cold_start": is_cold_start,
+                "is_llm": False,
+                "user_memory": memory
+            }
         
+        p1 = rec_display[0]
+
         if is_cold_start:
             response = (
                 f"Hello {user.get('name')}! Welcome o, make you feel comfortable! \n\n"
@@ -529,7 +543,8 @@ You must structure your response into exactly four sections:
                 f"Here are the top personalized recommendations I retrieved semantically for you:\n\n"
             )
             for i, p in enumerate(rec_display):
-                response += f"{i+1}. **{p.get('title')}** ({p.get('domain').upper()})\n"
+                domain_label = (p.get("domain") or "general").upper()
+                response += f"{i+1}. **{p.get('title')}** ({domain_label})\n"
                 response += f"   - Why you will love it: {p.get('desc')} (Semantic Match Score: {p.get('search_score')}) It fits your profile perfectly, no be lie!\n\n"
             response += "Let me know if you want me to search for another correct experience, sharp sharp!"
 

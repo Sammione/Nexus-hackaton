@@ -158,7 +158,13 @@ export default function App() {
                 chat_history: chatHistory
             })
         })
-            .then(res => res.json())
+            .then(async res => {
+                if (!res.ok) {
+                    const errBody = await res.json().catch(() => ({}));
+                    throw new Error(errBody.detail || `Server error ${res.status}`);
+                }
+                return res.json();
+            })
             .then(data => {
                 setChatLoading(false);
 
@@ -191,9 +197,16 @@ export default function App() {
                 ]);
             })
             .catch(err => {
-                console.error(err);
+                console.error("Recommendation error:", err);
                 setChatLoading(false);
-                alert("Recommendation agent failed to resolve abeg.");
+                // Show error as an in-chat bubble instead of a disruptive alert
+                setChatMessages(prev => [
+                    ...prev,
+                    {
+                        role: 'assistant',
+                        content: `⚠️ Wahala dey! The recommendation engine hit an error: *${err.message || 'Network failure'}*. Abeg try again or check the server logs.`
+                    }
+                ]);
             });
     };
 
